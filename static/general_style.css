@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+:root {
+  --radius: 21px;
+  --white-font: #eaf2f6;
+  --main-font: "Outfit", sans-serif;
+  --bit-font: "Jersey 10", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: var(--white-font);
+  font-family: var(--main-font);
+
+  background: linear-gradient(
+    180deg,
+    #2f3f4a 0%,
+    #4f6b7a 35%,
+    #7fa3b2 70%,
+    #eaf2f6 100%
+  );
+}
+
+/* HEADER */
+header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+/* LOGO */
+.logo {
+  height: 100px;
+  width: 100px;
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  width: 100%;
+  padding: 24px;
+}
+
+/* FOOTER */
+footer {
+  background-color: rgba(30, 40, 46, 0.9);
+  height: 321px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

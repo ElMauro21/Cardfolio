@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}Home{% endblock  %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static "core/landing_page.css" %}">
+{% endblock  %}
+
+{% block content %}
+    <div class="hero-content">
+      <h1>Track your card collection.<br>Understand its value.</h1>
+      <p class="subtitle">
+        A simple platform to track, analyze, and understand your trading card collection —
+        starting with Magic: The Gathering.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#" class="btn primary">Get Started</a>
+        <a href="#" class="btn secondary">Learn More</a>
+      </div>
+    </div>
+{% endblock  %}

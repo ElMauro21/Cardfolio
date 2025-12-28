@@ -1,0 +1,40 @@
+/* HERO */
+.hero-content {
+  max-width: 720px;
+  margin-top: 2rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2.5rem;
+}
+
+/* BUTTONS */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background: #ffffff;
+  color: #425c6a;
+}
+
+.btn.secondary {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}

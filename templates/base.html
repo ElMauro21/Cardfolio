@@ -8,10 +8,19 @@
     <link rel="stylesheet" href="{% static "general_style.css" %}">
     {% block styles %}{% endblock  %}
     {% block scripts %}{% endblock  %}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header><nav></nav></header>
+    <header>
+      <a href="{% url 'home' %}"><img class="logo" src="{% static "images/logo.png" %}" alt="Card Folio logo"></a>
+      <nav></nav>
+    </header>
     <main>{% block content %}{% endblock %}</main>
-    <footer></footer>
+    <footer>
+      <h2>This is the footer</h2>
+    </footer>
   </body>
 </html>
