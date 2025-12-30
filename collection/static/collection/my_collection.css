@@ -1,0 +1,172 @@
+/* ---------- Add card form ---------- */
+.collection-top {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  flex-wrap: nowrap;
+}
+
+.expensive-card {
+  max-width: 300px;
+}
+
+.expensive-card h3 {
+  text-align: center;
+  font-size: 0.8rem;
+  border: 1px solid var(--border-glass);
+  border-radius: 5px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+}
+
+.collection-form {
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-soft);
+  width: 300px;
+}
+
+.collection-form .form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.collection-form input {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.collection-form .field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.collection-form .field label {
+  min-height: 1.2rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.collection-form button {
+  width: auto;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: none;
+  background: #ffffff;
+  color: #1f2a33;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collection-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.card-tile {
+  position: relative;
+  font-family: var(--bit-font);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: 0.3s ease all;
+}
+
+.card-tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-tile:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.9)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.card-overlay span {
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+/* ---------- Collection list ---------- */
+.collection-list {
+  margin-top: 2rem;
+}
+
+.collection-header-row,
+.collection-row {
+  display: grid;
+  grid-template-columns: 2fr 0.8fr 0.6fr 1fr 1fr 0.4fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.collection-header-row {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.collection-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-name {
+  font-weight: 500;
+}
+
+/* ---------- Delete button ---------- */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ffb3b3;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: #ff6b6b;
+}
+
+/* ---------- Empty ---------- */
+.empty-state {
+  margin-top: 2rem;
+  color: var(--text-muted);
+}

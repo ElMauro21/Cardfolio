@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'cards',
+    'collection',
     'core',
     'integrations',
     'django.contrib.admin',
@@ -64,7 +65,8 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / "templates",
             BASE_DIR / "core" / "templates",
-            BASE_DIR / "accounts" / "templates"
+            BASE_DIR / "accounts" / "templates",
+            BASE_DIR / "collection" / "templates"
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -140,7 +142,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "core" / "static",
-    BASE_DIR / "accounts" / "static"
+    BASE_DIR / "accounts" / "static",
+    BASE_DIR / "collection" / "static"
 ]
 
 LOGIN_REDIRECT_URL = "home"

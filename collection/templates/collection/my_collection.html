@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}My Collection{% endblock  %}
+{% block styles %} <link rel="stylesheet" href="{% static "collection/my_collection.css" %}">{% endblock  %}
+
+{% block content %}
+  <div class="collection-top">
+    <div class="collection-add">
+      <form method="post" action="{% url 'add_card' %}" class="collection-form">
+        {% csrf_token %}
+
+        <div class="form-row">
+          <div class="field">
+            {{ form.set_code.label_tag }}
+            {{ form.set_code }}
+          </div>
+
+          <div class="field">
+            {{ form.collector_number.label_tag }}
+            {{ form.collector_number }}
+          </div>
+          
+          <div class="field">
+            {{ form.quantity.label_tag }}
+            {{ form.quantity }}
+          </div>
+
+          <div class="field">
+            {{ form.purchase_price.label_tag }}
+            {{ form.purchase_price }}
+          </div>
+        </div>
+
+        <button type="submit">Add card</button>
+      </form>
+    </div>
+    {% if collection %}
+      <div class="expensive-card">
+        <h3> This is your most expensive card: {{ most_expensive_card.card.price_usd }} USD </h3>
+        <div class="card-tile">
+          <img src="{{ most_expensive_card.card.image_url }}" alt="{{ most_expensive_card.card.name }}" loading="lazy">
+            <div class="card-overlay">
+              <span>{{ most_expensive_card.card.set_code|upper }}</span>
+            </div>
+          </div>
+      </div>
+    {% else %}
+      <h3> Add your first card! </h3>
+    {% endif %}
+    
+</div>
+
+  <div class="collection-list">
+    <div class="collection-header-row">
+      <span>Name</span>
+      <span>Set</span>
+      <span>Qty</span>
+      <span>Purchase</span>
+      <span>Market</span>
+      <span></span>
+    </div>
+
+    {% for uc in collection %}
+      <div class="collection-row">
+        <span class="card-name">{{ uc.card.name }}</span>
+        <span class="card-set">{{ uc.card.set_code|upper }}</span>
+        <span>x{{ uc.quantity }}</span>
+        <span>
+          {% if uc.purchase_price %}
+            ${{ uc.purchase_price }}
+          {% else %}
+            —
+          {% endif %}
+        </span>
+        <span>
+          {% if uc.card.price_usd %}
+            ${{ uc.card.price_usd }}
+          {% else %}
+            —
+          {% endif %}
+        </span>
+        <form method="post" action="{% url 'remove_card' uc.id %}">
+          {% csrf_token %}
+          <button class="delete-btn">✕</button>
+        </form>
+      </div>
+    {% empty %}
+      <p class="empty-state">Your collection is empty.</p>
+    {% endfor %}
+
+    </div>
+
+{% endblock  %}
