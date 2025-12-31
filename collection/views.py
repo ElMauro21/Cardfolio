@@ -5,13 +5,29 @@ from collection.services.collection_service import add_card_to_collection
 from cards.services.card_importer import import_exact_mtg_card
 from .models import UserCard
 from collection.models import UserCard
+from django.core.paginator import Paginator
 
 @login_required
 def my_collection_view(request):
     form = AddCardForm()
-    collection = (
-        request.user.collection.select_related("card").order_by("-added_at")
+
+    query = request.GET.get("q","").strip()
+
+    collection_qs = (
+        request.user.collection
+        .select_related("card")
     )
+
+    if query:
+        collection_qs = collection_qs.filter(
+            card__name__icontains=query
+        )
+        
+    collection_qs = collection_qs.order_by("card__name")
+
+    paginator = Paginator(collection_qs,10)
+    page_number = request.GET.get("page")
+    collection_page = paginator.get_page(page_number)
     
     most_expensive_card = (
         UserCard.objects
@@ -26,8 +42,9 @@ def my_collection_view(request):
 
     return render(request, "collection/my_collection.html", {
         "form": form,
-        "collection": collection,
-        "most_expensive_card": most_expensive_card
+        "collection": collection_page,
+        "most_expensive_card": most_expensive_card,
+        "query": query
     })
 
 @login_required

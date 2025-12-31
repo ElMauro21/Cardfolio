@@ -152,6 +152,33 @@
   font-weight: 500;
 }
 
+.card-name-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Preview image */
+.card-preview {
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+  width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 50;
+}
+
+/* Show on hover */
+.card-name-wrapper:hover .card-preview {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.02);
+}
+
 /* ---------- Delete button ---------- */
 .delete-btn {
   background: transparent;
@@ -169,4 +196,85 @@
 .empty-state {
   margin-top: 2rem;
   color: var(--text-muted);
+}
+
+/* ---------- Pagination ----------*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pagination a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Search bar ---------- */
+.collection-search {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  width: 310px;
+}
+
+/* Input */
+.collection-search input {
+  flex: 1;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.collection-search input::placeholder {
+  color: rgba(245, 247, 250, 0.55);
+}
+
+.collection-search input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--accent-soft);
+}
+
+/* Search button */
+.collection-search button {
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2a33;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collection-search button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Clear link */
+.clear-search {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+}
+
+.clear-search:hover {
+  text-decoration: underline;
 }

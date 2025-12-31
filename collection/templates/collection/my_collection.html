@@ -37,7 +37,7 @@
     </div>
     {% if collection %}
       <div class="expensive-card">
-        <h3> This is your most expensive card: {{ most_expensive_card.card.price_usd }} USD </h3>
+        <h3> Top card: {{ most_expensive_card.card.price_usd }} USD </h3>
         <div class="card-tile">
           <img src="{{ most_expensive_card.card.image_url }}" alt="{{ most_expensive_card.card.name }}" loading="lazy">
             <div class="card-overlay">
@@ -51,6 +51,24 @@
     
 </div>
 
+  <form method="get" class="collection-search">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search card..."
+      value="{{ query }}"
+    >
+
+    <button type="submit">Search</button>
+
+    {% if query %}
+      <a href="{% url 'my_collection' %}" class="clear-search">
+        Clear
+      </a>
+    {% endif %}
+  </form>
+
+
   <div class="collection-list">
     <div class="collection-header-row">
       <span>Name</span>
@@ -63,7 +81,15 @@
 
     {% for uc in collection %}
       <div class="collection-row">
-        <span class="card-name">{{ uc.card.name }}</span>
+        <span class="card-name-wrapper">
+          <span class="card-name">{{ uc.card.name }}</span>
+          <img 
+          src="{{ uc.card.image_url }}"
+          alt="{{ uc.card.name }}"
+          class="card-preview"
+          loading="lazy"
+          >
+        </span>
         <span class="card-set">{{ uc.card.set_code|upper }}</span>
         <span>x{{ uc.quantity }}</span>
         <span>
@@ -88,7 +114,19 @@
     {% empty %}
       <p class="empty-state">Your collection is empty.</p>
     {% endfor %}
-
     </div>
+    <div class="pagination">
+        {% if collection.has_previous %}
+          <a href="?q={{ query }}&page={{ collection.previous_page_number }}"> Previous </a>
+        {% endif %}
+
+        <span>
+          Page {{ collection.number }} of {{ collection.paginator.num_pages }}
+        </span>
+
+        {% if collection.has_next %}
+          <a href="?q={{ query }}&page={{ collection.next_page_number }}">Next</a>
+        {% endif %}
+      </div>
 
 {% endblock  %}
