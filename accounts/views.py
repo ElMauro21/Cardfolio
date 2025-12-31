@@ -25,7 +25,7 @@ def register_view(request):
                 password = form.cleaned_data["password"]
             )
             login(request, user)
-            return redirect("home")
+            return redirect("my_collection")
     else: 
         form = RegisterForm()
     

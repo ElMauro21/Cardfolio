@@ -63,6 +63,49 @@ main {
   padding: 24px;
 }
 
+/* NAVBAR */
+
+.main-nav {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Inner container */
+.nav-inner {
+  display: flex;
+  justify-content: stretch;
+}
+
+/* Right */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Links */
+.nav-right a {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-right a:hover {
+  color: var(--text-main);
+}
+
+/* Logout subtle emphasis */
+.nav-logout {
+  color: #ffb3b3;
+}
+
+.nav-logout:hover {
+  color: #ff6b6b;
+}
+
 /* FOOTER */
 footer {
   background-color: rgba(30, 40, 46, 0.9);

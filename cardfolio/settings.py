@@ -146,6 +146,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "collection" / "static"
 ]
 
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "my_collection"
 LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "home"
