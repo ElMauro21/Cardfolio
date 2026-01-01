@@ -81,6 +81,8 @@ def import_exact_mtg_card(
         else data["prices"]["usd"]
     )
 
+    image_url = extract_image_url(data)
+
     card, _ = Card.objects.get_or_create(
         scryfall_id=data["id"],
         finish=chosen_finish,
@@ -90,9 +92,26 @@ def import_exact_mtg_card(
             "set_name": data["set_name"],
             "collector_number": data["collector_number"],
             "rarity": data["rarity"],
-            "image_url": data["image_uris"]["normal"],
+            "image_url": image_url,
             "price_usd": price,
         }
     )
 
     return card
+
+def extract_image_url(data: dict) -> str | None:
+    """
+    Returns the best image URL for a card.
+    Supports single-face and multi-face cards.
+    """
+    image_uris = data.get("image_uris")
+    if image_uris:
+        return image_uris.get("normal")
+
+    card_faces = data.get("card_faces")
+    if card_faces and len(card_faces) > 0:
+        face_image_uris = card_faces[0].get("image_uris")
+        if face_image_uris:
+            return face_image_uris.get("normal")
+
+    return None

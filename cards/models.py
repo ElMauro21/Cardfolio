@@ -17,7 +17,7 @@ class Card(models.Model):
     set_name = models.CharField(max_length=100)
     rarity = models.CharField(max_length=50)
     collector_number = models.CharField(max_length=20)
-    image_url = models.URLField()
+    image_url = models.URLField(null=True, blank=True)
     price_usd = models.DecimalField(
         max_digits=10,decimal_places=2,null=True,blank=True
     )
