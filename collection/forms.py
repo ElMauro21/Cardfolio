@@ -31,3 +31,9 @@ class AddCardForm(forms.Form):
         required=False,
         label="Purchase price (optional)"
     )
+
+    is_foil = forms.BooleanField(
+        required=False,
+        initial=False,
+        label="Foil version"
+    )

@@ -5,6 +5,7 @@ def import_exact_mtg_card(
         *,
         set_code: str,
         collector_number: str,
+        is_foil: bool,
 ) -> Card:
     """
     Import an exact Magic: The Gathering card printing into the database.
@@ -65,28 +66,32 @@ def import_exact_mtg_card(
     
     available_finishes = data.get("finishes", [])
 
-    if "foil" in available_finishes:
-        chosen_finish = "foil"
-    elif "nonfoil" in available_finishes:
-        chosen_finish = "nonfoil"
+    if is_foil:
+        if "foil" not in available_finishes:
+            raise ValueError("This card does not have a foil version")
+        chosen_finish="foil"
     else:
-        chosen_finish = available_finishes[0] if available_finishes else None
-    
+        if "nonfoil" not in available_finishes:
+            raise ValueError("This card does not have a non-foil version")
+        chosen_finish = "nonfoil"
+
+    price = (
+        data["prices"]["usd_foil"]
+        if chosen_finish == "foil"
+        else data["prices"]["usd"]
+    )
+
     card, _ = Card.objects.get_or_create(
         scryfall_id=data["id"],
+        finish=chosen_finish,
         defaults={
             "name": data["name"],
             "set_code": data["set"],
             "set_name": data["set_name"],
             "collector_number": data["collector_number"],
-            "finish": chosen_finish,
             "rarity": data["rarity"],
             "image_url": data["image_uris"]["normal"],
-            "price_usd": (
-                data["prices"]["usd_foil"]
-                if chosen_finish == "foil"
-                else data["prices"]["usd"]
-            ),
+            "price_usd": price,
         }
     )
 

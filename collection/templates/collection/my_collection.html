@@ -30,6 +30,12 @@
             {{ form.purchase_price.label_tag }}
             {{ form.purchase_price }}
           </div>
+
+          <div class="field checkbox-field">
+            {{ form.is_foil }}
+            {{ form.is_foil.label_tag }}
+          </div>
+
         </div>
 
         <button type="submit">Add card</button>
@@ -82,7 +88,12 @@
     {% for uc in collection %}
       <div class="collection-row">
         <span class="card-name-wrapper">
-          <span class="card-name">{{ uc.card.name }}</span>
+          <span class="card-name">
+            {{ uc.card.name }}
+            <small>
+              ({{ uc.card.get_finish_display }})
+            </small>
+          </span>
           <img 
           src="{{ uc.card.image_url }}"
           alt="{{ uc.card.name }}"
@@ -90,7 +101,7 @@
           loading="lazy"
           >
         </span>
-        <span class="card-set">{{ uc.card.set_code|upper }}</span>
+        <span class="card-set">{{ uc.card.set_code|upper }} </span>
         <span>x{{ uc.quantity }}</span>
         <span>
           {% if uc.purchase_price %}

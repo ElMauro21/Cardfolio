@@ -62,6 +62,7 @@ def add_card_view(request):
         card = import_exact_mtg_card(
             set_code=data["set_code"],
             collector_number=data["collector_number"],
+            is_foil=data["is_foil"]
         )
 
         add_card_to_collection(
