@@ -29,7 +29,7 @@ class AddCardForm(forms.Form):
         max_digits=10,
         decimal_places=2,
         required=False,
-        label="Purchase price (optional)"
+        label="Purchase price"
     )
 
     is_foil = forms.BooleanField(
