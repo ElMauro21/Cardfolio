@@ -1,6 +1,7 @@
 import requests
 
 SCRYFALL_BASE_URL = "https://api.scryfall.com"
+SCRYFALL_TIMEOUT = 10
 
 def fetch_card(set_code: str, collector_number: str):
     """
@@ -47,7 +48,7 @@ def fetch_card(set_code: str, collector_number: str):
     """
     url = f"{SCRYFALL_BASE_URL}/cards/{set_code}/{collector_number}"
 
-    response = requests.get(url, timeout=10)
+    response = requests.get(url, timeout=SCRYFALL_TIMEOUT)
 
     if response.status_code != 200:
         return None
