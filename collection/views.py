@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from collection.forms import AddCardForm
-from collection.services.collection_service import add_card_to_collection
+from collection.services.transaction_service import apply_card_transaction
 from cards.services.card_importer import import_exact_mtg_card
-from .models import UserCard
 from collection.models import UserCard
 from django.core.paginator import Paginator
+from django.db.models import F, Sum, DecimalField, ExpressionWrapper
+from collection.models import CardTransaction
 
 @login_required
 def my_collection_view(request):
@@ -15,7 +16,12 @@ def my_collection_view(request):
 
     collection_qs = (
         request.user.collection
-        .select_related("card")
+        .select_related("card").annotate(
+            subtotal = ExpressionWrapper(
+                F("quantity") * F("card__price_usd"),
+                output_field=DecimalField(max_digits=12,decimal_places=2)
+            )
+        )
     )
 
     if query:
@@ -40,11 +46,16 @@ def my_collection_view(request):
         .first()
     )
 
+    total_value = collection_qs.aggregate(
+        total=Sum("subtotal")
+    )["total"]
+
     return render(request, "collection/my_collection.html", {
         "form": form,
         "collection": collection_page,
         "most_expensive_card": most_expensive_card,
-        "query": query
+        "query": query,
+        "total_value": total_value,
     })
 
 @login_required
@@ -65,11 +76,12 @@ def add_card_view(request):
             is_foil=data["is_foil"]
         )
 
-        add_card_to_collection(
+        apply_card_transaction(
             user=request.user,
             card=card,
+            transaction_type=CardTransaction.BUY,
             quantity=data["quantity"],
-            purchase_price=data.get("purchase_price"),
+            price_per_unit=data.get("purchase_price")
         )
 
         return redirect("my_collection")

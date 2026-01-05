@@ -54,7 +54,6 @@
     {% else %}
       <h3> Add your first card! </h3>
     {% endif %}
-    
 </div>
 
   <form method="get" class="collection-search">
@@ -74,14 +73,14 @@
     {% endif %}
   </form>
 
+  <span>Total collection value: {{ total_value }} USD</span>
 
   <div class="collection-list">
     <div class="collection-header-row">
       <span>Name</span>
-      <span>Set</span>
       <span>Qty</span>
-      <span>Purchase</span>
-      <span>Market</span>
+      <span>Market price / und</span>
+      <span>Subtotal</span>
       <span></span>
     </div>
 
@@ -101,18 +100,17 @@
           loading="lazy"
           >
         </span>
-        <span class="card-set">{{ uc.card.set_code|upper }} </span>
         <span>x{{ uc.quantity }}</span>
         <span>
-          {% if uc.purchase_price %}
-            ${{ uc.purchase_price }}
+          {% if uc.card.price_usd %}
+            ${{ uc.card.price_usd }}
           {% else %}
             —
           {% endif %}
         </span>
         <span>
-          {% if uc.card.price_usd %}
-            ${{ uc.card.price_usd }}
+          {% if uc.subtotal %}
+            {{ uc.subtotal }}
           {% else %}
             —
           {% endif %}
