@@ -1,5 +1,8 @@
 import pytest
 
+from django.contrib.auth import get_user_model
+from cards.models import Card
+
 
 @pytest.fixture
 def fake_scryfall_card_data():
@@ -30,3 +33,28 @@ def fake_scryfall_card_data():
         return data
 
     return _factory
+
+User = get_user_model()
+
+
+@pytest.fixture
+def user(db):
+    return User.objects.create_user(
+        username="testuser",
+        password="password123"
+    )
+
+
+@pytest.fixture
+def card(db):
+    return Card.objects.create(
+        name="Test Card",
+        scryfall_id="abc123",
+        finish="nonfoil",
+        set_code="lea",
+        set_name="Limited Edition Alpha",
+        rarity="rare",
+        collector_number="233",
+        price_usd=10,
+        image_url="https://example.com/card.jpg",
+    )
