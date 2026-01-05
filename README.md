@@ -71,3 +71,53 @@ SECRET_KEY="" -> Up to you
 APP_HOST="127.0.0.1"
 IS_DEVELOPMENT="TRUE"
 ```
+
+---
+
+## 🧪 Testing
+
+This project uses **pytest** with a clear separation between **unit tests** and **integration tests**, following backend best practices.
+
+---
+
+### 🔹 Test types
+
+**Unit tests**
+
+- Test pure functions and business logic in isolation
+- No database
+- No external services
+- External dependencies are mocked
+
+**Integration tests**
+
+- Test real interaction between business logic and the database
+- Django ORM and constraints are used for real
+- External APIs are mocked (e.g. Scryfall)
+
+---
+
+### 🏭 Factories & fixtures
+
+Reusable test data is provided via **pytest fixtures** defined in `conftest.py`.
+
+Examples:
+
+- `fake_scryfall_card_data` generates minimal valid Scryfall-like payloads
+- Tests override only the fields relevant to each scenario
+
+This approach keeps tests:
+
+- readable
+- maintainable
+- free of duplicated setup code
+
+---
+
+### ▶️ Running tests
+
+Run **all tests**:
+
+```bash
+pytest
+```
