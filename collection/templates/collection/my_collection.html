@@ -81,7 +81,8 @@
       <span>Qty</span>
       <span>Market price / und</span>
       <span>Subtotal</span>
-      <span></span>
+      <span>Sell</span>
+      <span>Delete</span>
     </div>
 
     {% for uc in collection %}
@@ -115,6 +116,28 @@
             —
           {% endif %}
         </span>
+        <form class="sell-form" method="post" action="{% url 'sell_card' uc.card.id %}">
+          {% csrf_token %}
+
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            max="{{ item.quantity }}"
+            placeholder="Qty"
+            required
+          >
+
+          <input
+            type="number"
+            step="0.01"
+            name="price_per_unit"
+            placeholder="Sell price"
+            required
+          >
+
+          <button type="submit">Sell</button>
+        </form>
         <form method="post" action="{% url 'remove_card' uc.id %}">
           {% csrf_token %}
           <button class="delete-btn">✕</button>

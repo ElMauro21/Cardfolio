@@ -107,16 +107,22 @@ def apply_card_transaction(
 
         if transaction_type == CardTransaction.BUY:
             user_card.quantity += quantity
+            user_card.save()
 
         elif transaction_type == CardTransaction.SELL:
             if user_card.quantity < quantity:
                 raise ValueError("Not enough cards to sell")
+            
             user_card.quantity -= quantity
-        
+
+            if user_card.quantity == 0:
+                user_card.delete()
+                user_card = None
+            else:
+                user_card.save()
+            
         else: 
             raise ValueError("Invalid transaction type")
-        
-        user_card.save()
 
         CardTransaction.objects.create(
             user=user,

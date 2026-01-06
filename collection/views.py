@@ -7,6 +7,7 @@ from collection.models import UserCard
 from django.core.paginator import Paginator
 from django.db.models import F, Sum, DecimalField, ExpressionWrapper
 from collection.models import CardTransaction
+from cards.models import Card
 
 @login_required
 def my_collection_view(request):
@@ -95,6 +96,25 @@ def remove_card_view(request, usercard_id):
 
     return redirect("my_collection")
 
+@login_required
+def sell_card_view(request, usercard_id):
+    if request.method != "POST":
+        return redirect("my_collection")
+    
+    quantity = int(request.POST["quantity"])
+    price = request.POST["price_per_unit"]
+
+    card = Card.objects.get(id=usercard_id)
+
+    apply_card_transaction(
+        user=request.user,
+        card=card,
+        transaction_type=CardTransaction.SELL,
+        quantity=quantity,
+        price_per_unit=price,
+    )
+
+    return redirect("my_collection")
 
 
 
