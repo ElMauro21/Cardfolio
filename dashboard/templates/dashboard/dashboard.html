@@ -5,61 +5,76 @@
 {% block styles %} <link rel="stylesheet" href="{% static "dashboard/dashboard.css" %}"> {% endblock  %}
 
 {% block content %}
-    <section class="dashboard">
+ <section class="dashboard">
 
-        <h1 class="dashboard-title">Portfolio Dashboard</h1>
+  <h1 class="dashboard-title">Portfolio Summary</h1>
 
-        <div class="dashboard-grid">
+  <table class="dashboard-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
 
-            <!-- Total Invested -->
-            <div class="metric-card">
-            <span class="metric-label">Total Invested</span>
-            <span class="metric-value">
-                ${{ total_invested|floatformat:2 }}
-            </span>
-            </div>
+      <tr>
+        <td>Total Invested</td>
+        <td>${{ total_invested|floatformat:2 }}</td>
+        <td>Total amount of money spent buying cards.</td>
+      </tr>
 
-            <!-- Total Earned -->
-            <div class="metric-card">
-            <span class="metric-label">Total Earned</span>
-            <span class="metric-value positive">
-                ${{ total_earned|floatformat:2 }}
-            </span>
-            </div>
+      <tr>
+        <td>Total Earned</td>
+        <td class="positive">${{ total_earned|floatformat:2 }}</td>
+        <td>Profit or loss already realized from sold cards.</td>
+      </tr>
 
-            <!-- Current Portfolio -->
-            <div class="metric-card">
-            <span class="metric-label">Current Portfolio</span>
-            <span class="metric-value">
-                ${{ current_portfolio_value|floatformat:2 }}
-            </span>
-            </div>
+      <tr>
+        <td>Current Portfolio Value</td>
+        <td>${{ current_portfolio_value|floatformat:2 }}</td>
+        <td>Market value of cards you currently own.</td>
+      </tr>
 
-            <!-- Unrealized P/L -->
-            <div class="metric-card">
-            <span class="metric-label">Unrealized P/L</span>
-            <span class="metric-value {% if unrealized_pl >= 0 %}positive{% else %}negative{% endif %}">
-                {{ unrealized_profit_loss|floatformat:2 }}
-            </span>
-            </div>
+      <tr>
+        <td>Unrealized P/L</td>
+        <td class="{% if unrealized_profit_loss >= 0 %}positive{% else %}negative{% endif %}">
+          {{ unrealized_profit_loss|floatformat:2 }}
+        </td>
+        <td>Paper gain or loss on cards not yet sold.</td>
+      </tr>
 
-            <!-- ROI -->
-            <div class="metric-card">
-            <span class="metric-label">ROI</span>
-            <span class="metric-value {% if roi >= 0 %}positive{% else %}negative{% endif %}">
-                {{ roi|floatformat:2 }}%
-            </span>
-            </div>
+      <tr>
+        <td>ROI</td>
+        <td class="{% if roi >= 0 %}positive{% else %}negative{% endif %}">
+          {{ roi|floatformat:2 }}%
+        </td>
+        <td>Return based only on cards you still hold.</td>
+      </tr>
 
-            <!-- Total ROI -->
-            <div class="metric-card highlight">
-            <span class="metric-label">Total ROI</span>
-            <span class="metric-value {% if total_roi >= 0 %}positive{% else %}negative{% endif %}">
-                {{ total_roi|floatformat:2 }}%
-            </span>
-            </div>
+      <tr class="highlight">
+        <td>Total ROI</td>
+        <td class="{% if total_roi >= 0 %}positive{% else %}negative{% endif %}">
+          {{ total_roi|floatformat:2 }}%
+        </td>
+        <td>Overall return including sold and held cards.</td>
+      </tr>
 
-        </div>
-    </section>
+    </tbody>
+  </table>
+
+  <div class="dashboard-explanation">
+    <h3>How to read these metrics</h3>
+    <ul>
+      <li><strong>Unrealized P/L</strong> can change as market prices update.</li>
+      <li><strong>Total Earned</strong> represents locked-in profit or loss.</li>
+      <li><strong>Total ROI</strong> is the best indicator of long-term performance.</li>
+      <li>Market prices are updated daily using Scryfall bulk data.</li>
+    </ul>
+  </div>
+
+</section>
+
 
 {% endblock  %}

@@ -65,11 +65,18 @@
   margin-bottom: 0.35rem;
 }
 
+.checkbox-field {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+}
+
 .checkbox-field input[type="checkbox"] {
-  transform: scale(2);
-  margin: 10px;
+  transform: scale(1.2);
+  margin-bottom: 10px;
   cursor: pointer;
   accent-color: rgba(255, 120, 120, 0.9);
+  justify-items: start;
 }
 
 .collection-form button {
