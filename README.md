@@ -1,11 +1,11 @@
 # CardFolio 🃏
 
-_A personal Magic: The Gathering collection tracker built with Django_
+_A Magic: The Gathering collection & investment tracker_
 
-CardFolio is a **work-in-progress web application** designed to help Magic: The Gathering players **track, manage, and analyze** their card collections.
+CardFolio is a **work-in-progress backend-focused web application** built with Django to track, manage, and analyze Magic: The Gathering card collections as **financial assets**.
 
-This project is part of my personal portfolio and learning journey as a backend / full-stack developer.  
-The goal is not only to build a functional app, but to model the domain correctly (prints, finishes, prices, ownership) and apply real-world backend practices.
+This project is part of my **personal portfolio** and learning journey as a backend / full-stack developer.  
+Its purpose is not just to work, but to demonstrate **correct domain modeling**, **data integrity**, **testing practices**, and **real-world backend patterns** such as data pipelines and batch processing.
 
 ---
 
@@ -13,8 +13,10 @@ The goal is not only to build a functional app, but to model the domain correctl
 
 ⚠️ **In active development**
 
-Core features are working, but the project is still evolving.  
-Expect breaking changes, refactors, and new functionality.
+Core functionality is implemented and stable, but the project is still evolving.  
+Expect refactors, new features, and architectural improvements as the system grows.
+
+This is intentional — the repository reflects how real projects evolve over time.
 
 ---
 
@@ -22,102 +24,53 @@ Expect breaking changes, refactors, and new functionality.
 
 - User authentication
 - Add cards by **exact printing** (set code + collector number)
-- Support for **Foil and Non-Foil** versions as distinct cards
+- **Foil and Non-Foil** modeled as separate entities
 - Integration with the **Scryfall API**
-- Store purchase price and market price
 - User collections with quantities
+- Buy & Sell transactions (historical record)
+- Portfolio metrics:
+  - Total invested
+  - Total earned
+  - Current portfolio value
+  - Unrealized profit / loss
+  - ROI
 - Pagination and search
-- Basic collection insights (e.g. most expensive card)
+- Dashboard with financial insights
 
 ---
 
-## 🧠 Design Philosophy
+## 🔄 Data Pipeline – Price Synchronization
 
-- **One Card = One exact printing**
-- Foil and Non-Foil are modeled as **separate entities**
-- Data integrity enforced with database constraints
-- External API logic isolated from business logic
-- Simple UI, focus on backend correctness first
+CardFolio includes a **custom data pipeline** to keep card prices up to date using **Scryfall bulk data**.
 
-This project prioritizes **correct domain modeling** over shortcuts.
+Instead of making API calls per card (slow, rate-limited, and inefficient), the application:
 
----
+- Fetches Scryfall bulk metadata
+- Downloads the `default_cards` JSON file
+- Processes data in memory
+- Updates **only the cards that exist in the local database**
 
-## 🛠 Tech Stack
+This mirrors real-world backend ingestion patterns.
 
-- **Python**
-- **Django**
-- **PostgreSQL**
-- Django Templates
-- Git & GitHub
-- Scryfall API
+### Why bulk data?
 
----
+- Avoids API rate limits
+- Reduces network overhead
+- Scales efficiently
+- Matches production-grade data ingestion workflows
 
-## 🔐 Environment Variables
+### Pipeline steps
 
-CardFolio uses environment variables for configuration.  
-Create a `.env` file in the project root with the following values:
+1. Fetch bulk metadata from Scryfall
+2. Download the bulk JSON file
+3. Index cards by `scryfall_id` for **O(1)** lookups
+4. Update local prices (foil / non-foil aware)
+5. Apply changes atomically using database transactions
 
-```env
-DB_NAME=""
-DB_USER=""
-DB_PASSWORD=""
-DB_HOST="localhost"
-DB_PORT="5432"
+### Orchestration
 
-SECRET_KEY="" -> Up to you
-
-APP_HOST="127.0.0.1"
-IS_DEVELOPMENT="TRUE"
-```
-
----
-
-## 🧪 Testing
-
-This project uses **pytest** with a clear separation between **unit tests** and **integration tests**, following backend best practices.
-
----
-
-### 🔹 Test types
-
-**Unit tests**
-
-- Test pure functions and business logic in isolation
-- No database
-- No external services
-- External dependencies are mocked
-
-**Integration tests**
-
-- Test real interaction between business logic and the database
-- Django ORM and constraints are used for real
-- External APIs are mocked (e.g. Scryfall)
-
----
-
-### 🏭 Factories & fixtures
-
-Reusable test data is provided via **pytest fixtures** defined in `conftest.py`.
-
-Examples:
-
-- `fake_scryfall_card_data` generates minimal valid Scryfall-like payloads
-- Tests override only the fields relevant to each scenario
-
-This approach keeps tests:
-
-- readable
-- maintainable
-- free of duplicated setup code
-
----
-
-### ▶️ Running tests
-
-Run **all tests**:
+The pipeline is executed via a **custom Django management command**:
 
 ```bash
-pytest
+python manage.py sync_scryfall_prices
 ```
