@@ -74,3 +74,108 @@ The pipeline is executed via a **custom Django management command**:
 ```bash
 python manage.py sync_scryfall_prices
 ```
+
+This allows the pipeline to be:
+
+- Run manually
+- Scheduled (cron, ECS task, CI job)
+- Executed independently of web traffic
+- This mirrors real backend batch job orchestration.
+
+## Key Backend Concepts Applied
+
+- Batch processing
+- In-memory indexing for O(1) lookups
+- Atomic database transactions
+- Separation of concerns
+- Fail-safe execution
+
+## Testing Strategy
+
+This project uses pytest with a clear separation between unit tests and integration tests.
+
+Unit tests
+
+- Test pure business logic
+- Minimal database usage (validation-level only)
+- No external services
+- External dependencies are mocked
+
+Integration tests
+
+- Use the real database
+- Validate ORM behavior and constraints
+- Test transactional behavior
+- External APIs are mocked (never called)
+
+Fixtures & factories
+
+- Reusable fixtures live in conftest.py, including:
+- Users
+- Cards
+- Fake Scryfall payloads
+
+This keeps tests:
+
+- readable
+- maintainable
+- expressive
+- fast
+
+Run all tests:
+
+```bash
+pytest
+```
+
+## Tech Stack
+
+- Python
+- Django
+- PostgreSQL
+- Django ORM
+- Django Templates
+- Pytest
+- Scryfall API
+- Git & GitHub
+
+## Environment Variables
+
+Create a .env file in the project root:
+
+DB_NAME=""
+DB_USER=""
+DB_PASSWORD=""
+DB_HOST="localhost"
+DB_PORT="5432"
+
+SECRET_KEY="any-secret-key"
+
+APP_HOST="127.0.0.1"
+IS_DEVELOPMENT="TRUE"
+
+## What I Learned Building This Project
+
+This project helped me deeply understand:
+
+- Backend fundamentals
+- Domain modeling beyond CRUD
+- Data integrity with constraints
+- Transactions and atomic operations
+- Separation of concerns
+- Data engineering concepts
+- Batch data ingestion
+- Bulk file processing
+- In-memory indexing for performance
+- Avoiding N+1 and per-record API calls
+- Thinking in pipelines, not requests
+- Testing mindset
+- Writing tests that expose design flaws
+- Using tests to guide refactors
+- Differentiating unit vs integration tests
+- Treating tests as executable documentation
+- Real-world engineering thinking
+- Modeling financial transactions correctly
+- Avoiding lossy updates
+- Designing systems that evolve safely
+- Understanding trade-offs, not just syntax
