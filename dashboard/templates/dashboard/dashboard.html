@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}Dashboard{% endblock  %}
+{% block styles %} <link rel="stylesheet" href="{% static "dashboard/dashboard.css" %}"> {% endblock  %}
+
+{% block content %}
+    <section class="dashboard">
+
+        <h1 class="dashboard-title">Portfolio Dashboard</h1>
+
+        <div class="dashboard-grid">
+
+            <!-- Total Invested -->
+            <div class="metric-card">
+            <span class="metric-label">Total Invested</span>
+            <span class="metric-value">
+                ${{ total_invested|floatformat:2 }}
+            </span>
+            </div>
+
+            <!-- Total Earned -->
+            <div class="metric-card">
+            <span class="metric-label">Total Earned</span>
+            <span class="metric-value positive">
+                ${{ total_earned|floatformat:2 }}
+            </span>
+            </div>
+
+            <!-- Current Portfolio -->
+            <div class="metric-card">
+            <span class="metric-label">Current Portfolio</span>
+            <span class="metric-value">
+                ${{ current_portfolio_value|floatformat:2 }}
+            </span>
+            </div>
+
+            <!-- Unrealized P/L -->
+            <div class="metric-card">
+            <span class="metric-label">Unrealized P/L</span>
+            <span class="metric-value {% if unrealized_pl >= 0 %}positive{% else %}negative{% endif %}">
+                {{ unrealized_profit_loss|floatformat:2 }}
+            </span>
+            </div>
+
+            <!-- ROI -->
+            <div class="metric-card">
+            <span class="metric-label">ROI</span>
+            <span class="metric-value {% if roi >= 0 %}positive{% else %}negative{% endif %}">
+                {{ roi|floatformat:2 }}%
+            </span>
+            </div>
+
+            <!-- Total ROI -->
+            <div class="metric-card highlight">
+            <span class="metric-label">Total ROI</span>
+            <span class="metric-value {% if total_roi >= 0 %}positive{% else %}negative{% endif %}">
+                {{ total_roi|floatformat:2 }}%
+            </span>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock  %}

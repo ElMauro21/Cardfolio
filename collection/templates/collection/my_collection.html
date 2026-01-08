@@ -72,8 +72,13 @@
       </a>
     {% endif %}
   </form>
+  
+  {% if query %}
+    <span>Total collection value: — </span>
+  {% else %}
+    <span>Total collection value: {{ total_value }} USD</span>
+  {% endif %}
 
-  <span>Total collection value: {{ total_value }} USD</span>
 
   <div class="collection-list">
     <div class="collection-header-row">

@@ -21,6 +21,7 @@
         <div class="nav-right">
           {% if request.user.is_authenticated %}
             <a href="{% url 'my_collection' %}">Collection</a>
+            <a href="{% url "dashboard" %}" >Dashboard</a>
             <a href="{% url 'logout' %}" class="nav-logout">Logout</a>
           {% else %}
             <a href="{% url 'login' %}">Login</a>

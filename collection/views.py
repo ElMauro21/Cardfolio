@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from collection.forms import AddCardForm
 from collection.services.transaction_service import apply_card_transaction
+from collection.services.portfolio_service import get_current_portfolio_value
 from cards.services.card_importer import import_exact_mtg_card
 from collection.models import UserCard
 from django.core.paginator import Paginator
@@ -47,9 +48,7 @@ def my_collection_view(request):
         .first()
     )
 
-    total_value = collection_qs.aggregate(
-        total=Sum("subtotal")
-    )["total"]
+    total_value = get_current_portfolio_value(request.user)
 
     return render(request, "collection/my_collection.html", {
         "form": form,

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cards',
     'collection',
     'core',
+    'dashboard',
     'integrations',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,7 +69,8 @@ TEMPLATES = [
             BASE_DIR / "templates",
             BASE_DIR / "core" / "templates",
             BASE_DIR / "accounts" / "templates",
-            BASE_DIR / "collection" / "templates"
+            BASE_DIR / "collection" / "templates",
+            BASE_DIR / "dashboard" / "templates"
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -145,7 +147,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "core" / "static",
     BASE_DIR / "accounts" / "static",
-    BASE_DIR / "collection" / "static"
+    BASE_DIR / "collection" / "static",
+    BASE_DIR / "dashboard" / "static"
 ]
 
 LOGIN_REDIRECT_URL = "my_collection"

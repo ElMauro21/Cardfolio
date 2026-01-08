@@ -65,6 +65,13 @@
   margin-bottom: 0.35rem;
 }
 
+.checkbox-field input[type="checkbox"] {
+  transform: scale(2);
+  margin: 10px;
+  cursor: pointer;
+  accent-color: rgba(255, 120, 120, 0.9);
+}
+
 .collection-form button {
   width: auto;
   margin-top: 0.5rem;
