@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import F, Sum, DecimalField, ExpressionWrapper
 from collection.models import CardTransaction
 from cards.models import Card
+from django.contrib import messages
 
 @login_required
 def my_collection_view(request):
@@ -70,12 +71,16 @@ def add_card_view(request):
     if form.is_valid():
         data = form.cleaned_data
 
-        card = import_exact_mtg_card(
-            set_code=data["set_code"],
-            collector_number=data["collector_number"],
-            is_foil=data["is_foil"]
-        )
-
+        try:
+            card = import_exact_mtg_card(
+                set_code=data["set_code"],
+                collector_number=data["collector_number"],
+                is_foil=data["is_foil"]
+            )
+        except ValueError as e:
+            messages.error(request, str(e), extra_tags="import-error")
+            return redirect("my_collection")
+        
         apply_card_transaction(
             user=request.user,
             card=card,
@@ -84,6 +89,7 @@ def add_card_view(request):
             price_per_unit=data.get("purchase_price")
         )
 
+        messages.success(request, "Card added to your collection!",extra_tags="import-success")
         return redirect("my_collection")
 
 @login_required
@@ -96,14 +102,19 @@ def sell_card_view(request, usercard_id):
 
     card = Card.objects.get(id=usercard_id)
 
-    apply_card_transaction(
-        user=request.user,
-        card=card,
-        transaction_type=CardTransaction.SELL,
-        quantity=quantity,
-        price_per_unit=price,
-    )
+    try:
+        apply_card_transaction(
+            user=request.user,
+            card=card,
+            transaction_type=CardTransaction.SELL,
+            quantity=quantity,
+            price_per_unit=price,
+        )
+    except ValueError as e:
+        messages.error(request, str(e), extra_tags="sell-error")
+        return redirect("my_collection")
 
+    messages.success(request, "Collection updated!",extra_tags="sell-success")
     return redirect("my_collection")
 
 

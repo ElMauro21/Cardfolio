@@ -344,3 +344,22 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
+
+/* ---------- Messages ---------- */
+
+.message {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.message.error {
+  background: rgba(255, 80, 80, 0.2);
+  color: #ffb3b3;
+}
+
+.message.success {
+  background: rgba(80, 255, 150, 0.2);
+  color: #b8ffd6;
+}

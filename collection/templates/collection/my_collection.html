@@ -7,9 +7,19 @@
 {% block content %}
   <div class="collection-top">
     <div class="collection-add">
+      {% for message in messages %}
+        {% if "import-error" in message.tags %}
+          <div class="message error">
+            {{ message }}
+          </div>
+        {% elif "import-success" in message.tags %}
+          <div class="message success">
+            {{ message }}
+          </div>
+        {% endif %}
+      {% endfor %}
       <form method="post" action="{% url 'add_card' %}" class="collection-form">
         {% csrf_token %}
-
         <div class="form-row">
           <div class="field">
             {{ form.set_code.label_tag }}
@@ -79,6 +89,17 @@
     <span>Total collection value: {{ total_value }} USD</span>
   {% endif %}
 
+  {% for message in messages %}
+    {% if "sell-error" in message.tags %}
+      <div class="message error">
+        {{ message }}
+      </div>
+    {% elif "sell-success" in message.tags %}
+      <div class="message success">
+        {{ message }}
+      </div>
+    {% endif %}
+  {% endfor %}
 
   <div class="collection-list">
     <div class="collection-header-row">
