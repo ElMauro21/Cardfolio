@@ -115,8 +115,52 @@ main {
 /* FOOTER */
 footer {
   background-color: rgba(30, 40, 46, 0.9);
-  height: 321px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-menus {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  text-align: center;
+}
+
+.footer-submenu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-submenu-container a {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-submenu-container a:hover {
+  color: var(--text-main);
+}
+
+.footer-disclaimer {
+  text-align: justify;
+  color: rgba(111, 111, 111, 0.757);
+  margin: 10px 21px 0;
+}
+
+.footer-submenu-container a.donate-button {
+  color: rgba(230, 130, 80, 0.803);
+}
+
+.footer-submenu-container a.donate-button:hover {
+  color: rgb(255, 143, 88);
 }

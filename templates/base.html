@@ -33,7 +33,60 @@
     </header>
     <main>{% block content %}{% endblock %}</main>
     <footer>
-      <h2>This is the footer</h2>
+      <div class="footer-container">
+        <div class="footer-menus">
+          <div class="footer-submenu-container">
+            <h3>Account</h3>
+            {% if request.user.is_authenticated %}  
+            <a href="{% url "my_collection" %}">My collection</a>
+            <a href="{% url "dashboard" %}">Dashboard</a>
+            <a href="{% url "logout" %}">Logout</a>
+            {% else %}
+            <a href={% url "register" %}>Register</a>
+            <a href={% url "login" %}>Login</a>
+            {% endif %}
+          </div>
+          <div class="footer-submenu-container">
+            <h3>More</h3>
+            <a 
+              target="_blank" 
+              href="https://paypal.me/mauricioalfonso21?locale.x=en_AU&country.x=AU"
+              rel="noopener noreferrer"
+              class="donate-button">
+              Support me
+            </a>
+            <a 
+              target="_blank" 
+              href="https://github.com/ElMauro21/Cardfolio">
+              GitHub
+            </a>
+            <a href="mailto:mauro311095@icloud.com">Contact me</a>
+          </div>
+        </div>
+        <div class="footer-disclaimer">
+          <p>CardFolio is an unofficial fan-made application for tracking Magic: The Gathering
+            collections.
+
+            This application uses the Scryfall API to retrieve card data and pricing
+            information. Card data, images, names, and related Magic: The Gathering content
+            are © Wizards of the Coast, LLC.
+
+            CardFolio is not produced by, endorsed by, sponsored by, or affiliated with
+            Wizards of the Coast or Scryfall.
+
+            Card prices and market values are provided by Scryfall and its affiliates and
+            are estimates only. No guarantee is made regarding accuracy or availability.
+
+            CardFolio is provided as-is, without warranty, and is intended for personal use.
+            <br>
+            <br>
+            Donations are voluntary and support the development and maintenance of this
+            application. 
+            Donations do not provide any in-app benefits or access to
+            exclusive features.
+          </p>
+        </div>
+</div>
     </footer>
   </body>
 </html>
