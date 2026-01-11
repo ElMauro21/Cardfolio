@@ -85,15 +85,6 @@ def add_card_view(request):
         )
 
         return redirect("my_collection")
-    
-@login_required
-def remove_card_view(request, usercard_id):
-    UserCard.objects.filter(
-        id = usercard_id,
-        user = request.user
-    ).delete()
-
-    return redirect("my_collection")
 
 @login_required
 def sell_card_view(request, usercard_id):

@@ -87,7 +87,6 @@
       <span>Market price / und</span>
       <span>Subtotal</span>
       <span>Sell</span>
-      <span>Delete</span>
     </div>
 
     {% for uc in collection %}
@@ -142,10 +141,6 @@
           >
 
           <button type="submit">Sell</button>
-        </form>
-        <form method="post" action="{% url 'remove_card' uc.id %}">
-          {% csrf_token %}
-          <button class="delete-btn">✕</button>
         </form>
       </div>
     {% empty %}

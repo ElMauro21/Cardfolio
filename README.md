@@ -143,16 +143,16 @@ pytest
 
 Create a .env file in the project root:
 
-DB_NAME=""
-DB_USER=""
-DB_PASSWORD=""
-DB_HOST="localhost"
-DB_PORT="5432"
+- DB_NAME=""
+- DB_USER=""
+- DB_PASSWORD=""
+- DB_HOST="localhost"
+- DB_PORT="5432"
 
-SECRET_KEY="any-secret-key"
+- SECRET_KEY="any-secret-key"
 
-APP_HOST="127.0.0.1"
-IS_DEVELOPMENT="TRUE"
+- APP_HOST="127.0.0.1"
+- IS_DEVELOPMENT="TRUE"
 
 ## What I Learned Building This Project
 
