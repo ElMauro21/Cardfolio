@@ -14,12 +14,12 @@
 
         {% if form.errors %}
             <p class="auth-message error">
-                Invalid username or password
+                Invalid email / username or password
             </p>
         {% endif %}
 
         <div class="field">
-            <label for="{{ form.username.id_for_label }}">Username</label>
+            <label for="{{ form.username.id_for_label }}">Email or Username</label>
             <input 
                 type="text"
                 name="{{ form.username.name }}"
@@ -44,6 +44,9 @@
         <div class="auth-footer">
             Don’t have an account?
             <a href="{% url 'register' %}">Create one</a>
+            <br>
+            Forgot your password ? 
+            <a href="{% url 'password_reset' %}">Reset password</a>
         </div>
     </form>
 </div>

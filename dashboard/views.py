@@ -22,6 +22,10 @@ def dashboard_view(request):
     roi = get_roi_percentage(request.user)
     total_roi = get_total_roi_percentage(request.user)
 
+    if current_portfolio_value == 0:
+        unrealized_profit_loss = None
+        roi = None
+
     return render(request, "dashboard/dashboard.html",{
         "total_invested": total_invested,
         "total_earned": total_earned,

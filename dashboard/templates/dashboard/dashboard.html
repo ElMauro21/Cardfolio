@@ -40,7 +40,11 @@
       <tr>
         <td>Unrealized P/L</td>
         <td class="{% if unrealized_profit_loss >= 0 %}positive{% else %}negative{% endif %}">
-          {{ unrealized_profit_loss|floatformat:2 }}
+          {% if unrealized_profit_loss %}
+            {{ unrealized_profit_loss|floatformat:2 }}
+          {% else %}
+            —
+          {% endif %}
         </td>
         <td>Paper gain or loss on cards not yet sold.</td>
       </tr>
@@ -48,7 +52,12 @@
       <tr>
         <td>ROI</td>
         <td class="{% if roi >= 0 %}positive{% else %}negative{% endif %}">
-          {{ roi|floatformat:2 }}%
+          {% if roi %}
+            {{ roi|floatformat:2 }}%
+          {% else %}
+            —
+          {% endif %}
+          
         </td>
         <td>Return based only on cards you still hold.</td>
       </tr>

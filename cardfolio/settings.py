@@ -155,3 +155,13 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = "my_collection"
 LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "home"
+
+AUTHENTICATION_BACKENDS = [
+    "accounts.auth_backends.EmailOrUsernameBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+DEFAULT_FROM_EMAIL = "CardFolio <mauro311095@icloud.com>"
