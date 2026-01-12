@@ -15,3 +15,9 @@ def landing_page_view(request):
     return render(request,"core/landing_page.html",{
         "cards": cards
     })
+
+def learn_more_view(request): 
+    """
+    Renders the learn more page.
+    """
+    return render(request,"core/learn_more.html")

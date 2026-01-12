@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}Learn More{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'core/learn_more.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="learn-container">
+
+  <h1 class="learn-title">How CardFolio Works</h1>
+  <p class="learn-intro">
+    CardFolio helps you track your Magic: The Gathering cards as real investments.
+    Below you’ll find a quick guide to understand how to use the app and how each action affects your portfolio.
+  </p>
+
+  <!-- STEP 1 -->
+  <section class="learn-section">
+    <div class="learn-text">
+      <h2>1. Adding a card to your collection</h2>
+      <p>
+        To add a card, you need two identifiers printed on every Magic card:
+      </p>
+
+      <ul>
+        <li><strong>Set code</strong> – identifies the expansion (e.g. <code>ECL</code>)</li>
+        <li><strong>Collector number</strong> – identifies the exact printing (e.g. <code>320</code>)</li>
+      </ul>
+
+      <p>
+        These two values guarantee that CardFolio imports the <em>exact printing</em>
+        from Scryfall — including artwork, rarity. Check the Foil version checkbox if you card has a foil finish.
+      </p>
+
+      <p>
+        <strong>Purchase price</strong>.  
+        It represents how much you paid per card and is used later to calculate:
+      </p>
+
+      <ul>
+        <li>Total Invested</li>
+        <li>ROI</li>
+        <li>Profit & Loss</li>
+      </ul>
+    </div>
+
+    <div class="learn-image">
+      <img src="{% static 'images/tutorial1.png' %}" alt="Add card tutorial">
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="learn-section reverse">
+    <div class="learn-text">
+      <h2>2. Selling a card</h2>
+
+      <p>
+        Selling a card creates a <strong>SELL transaction</strong>.
+        You choose:
+      </p>
+
+      <ul>
+        <li>How many copies to sell</li>
+        <li>The price per unit you sold them for</li>
+      </ul>
+
+      <p>
+        When a card is sold:
+      </p>
+
+      <ul>
+        <li>Your collection quantity is reduced</li>
+        <li>A transaction is permanently stored</li>
+        <li>Realized profit/loss is updated</li>
+      </ul>
+
+      <p>
+        If you sell your last copy, the card disappears from your collection —
+        but the transaction history remains.
+      </p>
+    </div>
+
+    <div class="learn-image">
+      <img src="{% static 'images/tutorial2.png' %}" alt="Sell card tutorial">
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="learn-section">
+    <div class="learn-text">
+      <h2>3. Understanding the dashboard</h2>
+
+      <p>
+        The dashboard summarizes your collection as a portfolio.
+        Each metric answers a different question:
+      </p>
+
+      <ul>
+        <li><strong>Total Invested</strong> – money spent buying cards</li>
+        <li><strong>Total Earned</strong> – money received from sold cards</li>
+        <li><strong>Current Portfolio Value</strong> – market value of cards you still own</li>
+        <li><strong>Unrealized P/L</strong> – paper gains or losses</li>
+        <li><strong>ROI</strong> – performance of cards you still hold</li>
+        <li><strong>Total ROI</strong> – overall performance including sold cards</li>
+      </ul>
+
+      <p>
+        Market prices are updated daily using Scryfall bulk data.
+      </p>
+    </div>
+
+    <div class="learn-image">
+      <img src="{% static 'images/tutorial3.png' %}" alt="Dashboard tutorial">
+    </div>
+  </section>
+
+</div>
+{% endblock %}

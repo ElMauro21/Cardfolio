@@ -1,0 +1,60 @@
+.learn-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  padding-top: 0;
+}
+
+.learn-title {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.learn-intro {
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  max-width: 700px;
+}
+
+.learn-section {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.learn-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.learn-text {
+  flex: 1;
+}
+
+.learn-text h2 {
+  margin-bottom: 1rem;
+}
+
+.learn-text p {
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+}
+
+.learn-text ul {
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.learn-text li {
+  margin-bottom: 0.4rem;
+}
+
+.learn-image {
+  flex: 1;
+}
+
+.learn-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+}
