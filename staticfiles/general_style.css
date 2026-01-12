@@ -1,0 +1,166 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+:root {
+  --radius: 21px;
+  --white-font: #eaf2f6;
+  --main-font: "Outfit", sans-serif;
+  --bit-font: "Jersey 10", sans-serif;
+  --bg-glass: rgba(255, 255, 255, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.18);
+  --text-main: #f5f7fa;
+  --text-muted: rgba(245, 247, 250, 0.65);
+  --accent: #ffffff;
+  --accent-soft: rgba(255, 255, 255, 0.85);
+  --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: var(--white-font);
+  font-family: var(--main-font);
+
+  background: linear-gradient(
+    180deg,
+    #2f3f4a 0%,
+    #4f6b7a 35%,
+    #7fa3b2 70%,
+    #eaf2f6 100%
+  );
+}
+
+/* HEADER */
+header {
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+/* LOGO */
+.logo {
+  height: 100px;
+  width: 150px;
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  width: 100%;
+  padding: 24px;
+}
+
+/* NAVBAR */
+
+.main-nav {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Inner container */
+.nav-inner {
+  display: flex;
+  justify-content: stretch;
+}
+
+/* Right */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Links */
+.nav-right a {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.nav-right a:hover {
+  color: var(--text-main);
+}
+
+/* Logout subtle emphasis */
+.nav-logout {
+  color: #ffb3b3;
+}
+
+.nav-logout:hover {
+  color: #ff6b6b;
+}
+
+/* FOOTER */
+footer {
+  background-color: rgba(30, 40, 46, 0.9);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-menus {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  text-align: center;
+}
+
+.footer-submenu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-submenu-container a {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-submenu-container a:hover {
+  color: var(--text-main);
+}
+
+.footer-disclaimer {
+  text-align: justify;
+  color: rgba(111, 111, 111, 0.757);
+  margin: 10px 21px 0;
+}
+
+.footer-submenu-container a.donate-button {
+  color: rgba(230, 130, 80, 0.803);
+}
+
+.footer-submenu-container a.donate-button:hover {
+  color: rgb(255, 143, 88);
+}

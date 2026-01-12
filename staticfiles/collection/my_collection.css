@@ -1,0 +1,365 @@
+/* ---------- Add card form ---------- */
+.collection-top {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  flex-wrap: nowrap;
+}
+
+.expensive-card {
+  max-width: 300px;
+}
+
+.expensive-card h3 {
+  text-align: center;
+  font-size: 0.8rem;
+  border: 1px solid var(--border-glass);
+  border-radius: 5px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+}
+
+.collection-form {
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-soft);
+  width: 300px;
+}
+
+.collection-form .form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.collection-form input:not([type="checkbox"]) {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.collection-form .field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.collection-form .field label {
+  min-height: 1.2rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.checkbox-field {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+}
+
+.checkbox-field input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-bottom: 10px;
+  cursor: pointer;
+  accent-color: rgba(255, 120, 120, 0.9);
+  justify-items: start;
+}
+
+.collection-form button {
+  width: auto;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: none;
+  background: #ffffff;
+  color: #1f2a33;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collection-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.card-tile {
+  position: relative;
+  font-family: var(--bit-font);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: 0.3s ease all;
+}
+
+.card-tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-tile:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.9)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.card-overlay span {
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+/* ---------- Collection list ---------- */
+.collection-list {
+  margin-top: 2rem;
+}
+
+.collection-header-row,
+.collection-row {
+  display: grid;
+  grid-template-columns: 2fr 0.8fr 0.6fr 1fr 1fr 0.4fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.collection-header-row {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.collection-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-name {
+  font-weight: 500;
+}
+
+.card-name-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Preview image */
+.card-preview {
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+  width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 50;
+}
+
+/* Show on hover */
+.card-name-wrapper:hover .card-preview {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.02);
+}
+
+/* ---------- Delete button ---------- */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ffb3b3;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: #ff6b6b;
+}
+
+/* ---------- Empty ---------- */
+.empty-state {
+  margin-top: 2rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Pagination ----------*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pagination a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Search bar ---------- */
+.collection-search {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  width: 310px;
+}
+
+/* Input */
+.collection-search input {
+  flex: 1;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.collection-search input::placeholder {
+  color: rgba(245, 247, 250, 0.55);
+}
+
+.collection-search input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--accent-soft);
+}
+
+/* Search button */
+.collection-search button {
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2a33;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collection-search button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Clear link */
+.clear-search {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+}
+
+.clear-search:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Sell form ---------- */
+.sell-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.4rem;
+}
+
+.sell-form input {
+  width: 75px;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 0.35rem 0.45rem;
+  color: var(--text-main);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.sell-form input::placeholder {
+  color: rgba(245, 247, 250, 0.55);
+  font-size: 0.65rem;
+}
+
+.sell-form input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffb3b3;
+}
+
+/* Sell button */
+.sell-form button {
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 120, 120, 0.9);
+  color: #1f2a33;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.sell-form button:hover {
+  background: #ff6b6b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Messages ---------- */
+
+.message {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.message.error {
+  background: rgba(255, 80, 80, 0.2);
+  color: #ffb3b3;
+}
+
+.message.success {
+  background: rgba(80, 255, 150, 0.2);
+  color: #b8ffd6;
+}
