@@ -11,9 +11,9 @@ Its purpose is not just to work, but to demonstrate **correct domain modeling**,
 
 ## 🚧 Project Status
 
-⚠️ **Deplyed - In active development**
+⚠️ **Deployed - In active development**
 
-[Cardfolio](cardfolio.ap-southeast-2.elasticbeanstalk.com)
+[Cardfolio](cardfolio.ap-southeast-2.elasticbeanstalk.com) / cardfolio.ap-southeast-2.elasticbeanstalk.com
 
 Core functionality is implemented and stable, but the project is still evolving.  
 Expect refactors, new features, and architectural improvements as the system grows.
